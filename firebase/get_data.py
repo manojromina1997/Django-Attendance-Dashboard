@@ -9,19 +9,8 @@ import random
 import json
 
 from ..attendance_dashboard import firebase_config
-
-<<<<<<< HEAD
 config = firebase_config.get_pyrebase_config()
 firebase_config.initialize_firebase_admin()
-=======
-config = {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "storageBucket": ",
-    "messagingSenderId": ""
->>>>>>> f3665f310856e5aa104a6de898911b73e23ec174
 
 
 weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]

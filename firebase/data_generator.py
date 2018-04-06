@@ -8,18 +8,7 @@ from firebase_admin import db
 import random
 import json
 
-
-<<<<<<< HEAD
 from ..attendance_dashboard import firebase_config
-=======
-config = {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "storageBucket": ",
-    "messagingSenderId": ""
->>>>>>> f3665f310856e5aa104a6de898911b73e23ec174
 
 config = firebase_config.get_pyrebase_config()
 firebase_config.initialize_firebase_admin()

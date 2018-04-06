@@ -13,26 +13,6 @@ from . import firebase_config
 config = firebase_config.get_pyrebase_config()
 firebase_config.initialize_firebase_admin()
 
-<<<<<<< HEAD
-=======
-config = {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "projectId": "",
-    "storageBucket": "",
-    "messagingSenderId": ""
-
-}
-
-# Fetch the service account key JSON file contents
-cred = credentials.Certificate('/home/manojromina/dashboard_project/attendance_dashboard/credentials.json')
-
-# Initialize the app with a service account, granting admin privileges
-firebase_admin.initialize_app(cred, {
-    'databaseURL': ''
-})
->>>>>>> f3665f310856e5aa104a6de898911b73e23ec174
 
 weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 emotions = ['happy', 'angry', 'fear', 'neutral', 'sadness', 'disgust']
