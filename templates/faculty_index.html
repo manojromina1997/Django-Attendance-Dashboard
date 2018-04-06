@@ -1,0 +1,384 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<script>
+
+  $(function() {
+    if ($("#sales-chart").length) {
+      var ctx = document.getElementById('sales-chart').getContext("2d");
+
+      var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke1.addColorStop(0, 'rgba(83, 227 ,218, 0.9)');
+      gradientStroke1.addColorStop(1, 'rgba(45, 180 ,235, 0.9)');
+
+      var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke2.addColorStop(0, 'rgba(132, 179 ,247, 0.9)');
+      gradientStroke2.addColorStop(1, 'rgba(164, 90 ,249, 0.9)');
+
+      var myChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+              labels: [1, 2, 3, 4, 5, 6, 7, 8],
+              datasets: [
+                {
+                  label: "Audi",
+                  borderColor: gradientStroke2,
+                  backgroundColor: gradientStroke2,
+                  pointRadius: 0,
+                  fill: false,
+                  borderWidth: 1,
+                  fill: 'origin',
+                  data: [0, 30, 60, 25, 60, 25, 50, 0]
+                },
+                {
+                  label: "BMW",
+                  borderColor: gradientStroke1,
+                  borderColor: gradientStroke1,
+                  backgroundColor: gradientStroke1,
+                  pointRadius: 0,
+                  fill: false,
+                  borderWidth: 1,
+                  fill: 'origin',
+                  data: [0, 60, 25, 80, 35, 75, 30, 0]
+                }
+            ]
+          },
+          options: {
+              legend: {
+                  position: "top"
+              },
+              scales: {
+                xAxes: [{
+                  ticks: {
+                    display: true,
+                    beginAtZero:true,
+                    fontColor: 'rgba(0, 0, 0, 1)'
+                  },
+                  gridLines: {
+                    display:false,
+                    drawBorder: false,
+                    color: 'transparent',
+                    zeroLineColor: '#eeeeee'
+                  }
+                }],
+                yAxes: [{
+                  gridLines: {
+                    drawBorder: false,
+                    display:true,
+                    color: '#eeeeee',
+                  },
+                  categoryPercentage: 0.5,
+                  ticks: {
+                    display: true,
+                    beginAtZero: true,
+                    stepSize: 20,
+                    max: 100,
+                    fontColor: 'rgba(0, 0, 0, 1)'
+                  }
+                }]
+              },
+              },
+              elements: {
+                point: {
+                  radius: 0
+                }
+              }
+            })
+    }
+    if ($("#satisfaction-chart").length) {
+      var ctx = document.getElementById('satisfaction-chart').getContext("2d");
+
+      var gradientStrokeBluePurple = ctx.createLinearGradient(0, 0, 0, 250);
+      gradientStrokeBluePurple.addColorStop(0, '#5607fb');
+      gradientStrokeBluePurple.addColorStop(1, '#9425eb');
+      var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+              labels: [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26],
+              datasets: [
+                {
+                  label: "Audi",
+                  borderColor: gradientStrokeBluePurple,
+                  backgroundColor: gradientStrokeBluePurple,
+                  hoverBackgroundColor: gradientStrokeBluePurple,
+                  pointRadius: 0,
+                  fill: false,
+                  borderWidth: 1,
+                  fill: 'origin',
+                  data: [50, 45, 25, 35, 40, 25, 15, 40, 20, 15, 30, 50, 26, 45, 37, 26]
+                }
+            ]
+          },
+          options: {
+              legend: {
+                  display: false
+              },
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          display: false,
+                          min: 0,
+                          stepSize: 10
+                      },
+                      gridLines: {
+                        drawBorder: false,
+                        display: true
+                      }
+                  }],
+                  xAxes: [{
+                      gridLines: {
+                        display:false,
+                        drawBorder: false,
+                        color: 'rgba(0,0,0,1)',
+                        zeroLineColor: '#eeeeee'
+                      },
+                      ticks: {
+                          padding: 20,
+                          fontColor: "rgba(0,0,0,1)",
+                          autoSkip: true,
+                          maxTicksLimit: 6
+                      },
+                      barPercentage: 0.7
+                  }]
+                }
+              },
+              elements: {
+                point: {
+                  radius: 0
+                }
+              }
+            })
+    }
+  });
+})(jQuery);
+</script>
+{% load static %}
+  <div class="container-scroller">
+        {% include 'navbar.html' %}
+        <!-- partial -->
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-warning text-white">
+                <div class="card-body">
+                  <h4 class="font-weight-normal mb-3">Total Number of Lectures</h4>
+                  <h2 class="font-weight-normal mb-5">{{number_lectures}}</h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-info text-white">
+                <div class="card-body">
+                  <h4 class="font-weight-normal mb-3">Average Attendedance(per Lecture)</h4>
+                  <h2 class="font-weight-normal mb-5">{{average_attendance}}</h2>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 stretch-card grid-margin">
+              <div class="card bg-gradient-info text-white">
+                <div class="card-body">
+                  <h4 class="font-weight-normal mb-3">Absent</h4>
+                  <h2 class="font-weight-normal mb-5">{{absent_count}}</h2>
+                </div>
+              </div>
+            </div>
+
+          </div>
+               <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div id="donutchart" style="height: 400px;"></div>
+                </div>
+              </div>
+            </div>
+           </div>
+          <div class="row">
+            <div class="col-md-7 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div id="columnchart_material" style="height: 350px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-5 grid-margin stretch-card">
+
+              <div class="card">
+                <div class="card-body d-flex flex-column" >
+                  <h4 class="card-title">Attendance Graph</h4>
+
+                     <div id="piechart" style="height: 350px;"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div id="table_div"></div>
+                </div>
+              </div>
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div id="calendar_basic" style="height: 250px;"></div>
+                    <div id="calendar_emotions" style="height: 250px;"></div>
+                </div>
+              </div>
+            </div>
+           </div>
+
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2017 <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap Dash</a>. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="mdi mdi-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- row-offcanvas ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <script src="{%static 'js/dashboard.js'%}"></script>
+
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<!--pie chart-->
+<script type="text/javascript">
+// Load google charts
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
+// Draw the chart and set the chart values
+function drawChart() {
+  var data = google.visualization.arrayToDataTable({{attendance_pie|safe}});
+
+  // Optional; add a title and set the width and height of the chart
+  var options = {'title':'Attendance by Subject', 'width':380, 'height':350};
+
+  // Display the chart inside the <div> element with id="piechart"
+  var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+  chart.draw(data, options);
+}
+
+  </script>
+
+
+  <!--Attendance Calendar-->
+  <script type="text/javascript">
+      google.charts.load("current", {packages:["calendar"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Present' });
+       var attendance = {{subject_attendance|safe}}
+       var date = []
+
+       <!--document.write(attendance);-->
+       for (i = 0; i < attendance.length; i++) {
+       var a = attendance[i];
+       var b = a[0];
+       var c = a[1];
+
+       dataTable.addRows([[new Date(b[0],b[1]-1,b[2]),c]]);
+        }
+
+
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
+
+       var options = {
+         title: "Attendance by Date",
+         height: 200,
+       };
+
+       chart.draw(dataTable, options);
+   }
+    </script>
+
+    <!--Emotion Calendar-->
+  <script type="text/javascript">
+      google.charts.load("current", {packages:["calendar"]});
+      google.charts.setOnLoadCallback(drawChart);
+
+   function drawChart() {
+       var dataTable = new google.visualization.DataTable();
+       dataTable.addColumn({ type: 'date', id: 'Date' });
+       dataTable.addColumn({ type: 'number', id: 'Average Emotions' });
+       var attendance = {{overall_subject_emotion|safe}}
+       var date = []
+
+       <!--document.write(attendance);-->
+       for (i = 0; i < attendance.length; i++) {
+       var a = attendance[i];
+       var b = a[0];
+       var c = a[1];
+
+       dataTable.addRows([[new Date(b[0],b[1]-1,b[2]),c]]);
+        }
+
+       var chart = new google.visualization.Calendar(document.getElementById('calendar_emotions'));
+
+       var options = {
+         title: "Emotions by Date",
+         height: 200,
+       };
+
+       chart.draw(dataTable, options);
+   }
+    </script>
+
+    <!--Emtion Pie Chart -->
+ <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable( {{subject_pie_emotion|safe}});
+
+        var options = {
+          title: 'Overall Emotions',
+          is3D: true,
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+
+    <!--Emotion Table -->
+     <script type="text/javascript">
+      google.charts.load('current', {'packages':['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Emotion');
+        data.addColumn('number', 'Number');
+         data.addRows([
+          ['Happy',1], ['Surprise',2], ['Neutral',3], ['Disgust',4], ['Sad',5],
+           ['Angry',6], ['Fear',7]
+        ]);
+        var table = new google.visualization.Table(document.getElementById('table_div'));
+
+        table.draw(data, {showRowNumber: false, width: '80%', height: '100%'});
+      }
+
+
+    </script>
+{% endblock content %}
